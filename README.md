@@ -8,4 +8,6 @@ Dependencies:
   
 Usage example:
 
-    export SLACK_API_TOKEN="xoxb-123456789012-1234567890123-abcDEFGhIjkLmnOpqurstUvwxyz" ; export SLACK_USER_IDS=UB1234567,UC8901234,UD5678901,UE2345678,UF9012345 ; python3 slackstatus.py
+    export SLACK_API_TOKEN="xoxb-123456789012-1234567890123-abcDEFGhIjkLmnOpqurstUvwxyz" ; \
+    export SLACK_USER_IDS=UB1234567,UC8901234,UD5678901,UE2345678,UF9012345 ; \
+    python3 slackstatus.py
