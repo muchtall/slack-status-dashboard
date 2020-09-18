@@ -13,3 +13,5 @@ Usage example:
     python3 slack-status-dashboard.py
 
 The script will output an HTML file named *slack-status-dashboard.html* and refresh its content every ~60 seconds. The page refreshes itself in the browser every 5 seconds.
+
+This is intended to work in concert with https://github.com/muchtall/slack-status-updater
