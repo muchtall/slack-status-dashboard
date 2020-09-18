@@ -12,4 +12,4 @@ Usage example:
     export SLACK_USER_IDS=UB1234567,UC8901234,UD5678901,UE2345678,UF9012345 ; \
     python3 slack-status-dashboard.py
 
-The script will output an HTML file and refresh its content every ~60 seconds.
+The script will output an HTML file named *slack-status-dashboard.html* and refresh its content every ~60 seconds. The page refreshes itself in the browser every 5 seconds.
