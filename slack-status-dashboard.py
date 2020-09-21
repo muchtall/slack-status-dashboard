@@ -5,6 +5,7 @@ import os
 import urllib
 import json
 import emoji
+import Logger
 from slack import WebClient
 from slack.errors import SlackApiError
 from flask import Flask, request, send_from_directory
