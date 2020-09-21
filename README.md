@@ -3,6 +3,10 @@
 
 Similar to an in-out board, this is a simple HTML dashboard to allow walk-up kiosk viewers to see the status of department members at a glance.
 
+Screenshot:
+
+![Screenshot](https://user-images.githubusercontent.com/16903291/93802325-ee873e00-fc08-11ea-9e4d-e9622ba40d81.png "Dashboard")
+
 To build:
 
     docker build -t muchtall/slack-status-dashboard  
