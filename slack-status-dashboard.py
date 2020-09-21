@@ -136,7 +136,7 @@ def dashboard():
 	        status_emoji_url = custom_emoji_list[status_emoji]
 	      except:
 	        #emoji_code = emoji.emojize(':'+status_emoji+':').lower()
-            for emoji_entry in emoji_dict:
+	        for emoji_entry in emoji_dict:
               if emoji_entry["short_name"].lower() == status_emoji.lower():
                 emoji_code = emoji_entry["unified"]
                 break
