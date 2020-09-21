@@ -40,7 +40,7 @@ def dashboard():
 
     # Get a dictionary of emojis (since emoji/emojize doesn't cover them all)
 	with urllib.request.urlopen('https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji.json') as standard_emoji_response:
-        emoji_dict = json.loads(standard_emoji_response.read().decode())
+	  emoji_dict = json.loads(standard_emoji_response.read().decode())
 
 	client = WebClient(token=slack_token)
 	
