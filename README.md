@@ -5,7 +5,7 @@ Similar to an in-out board, this is a simple HTML dashboard to allow walk-up kio
 
 Screenshot:
 
-![Screenshot](https://user-images.githubusercontent.com/16903291/93802325-ee873e00-fc08-11ea-9e4d-e9622ba40d81.png "Dashboard")
+![Screenshot](https://user-images.githubusercontent.com/16903291/93802694-68b7c280-fc09-11ea-8ef8-8f7ebcb3ac22.png "Dashboard")
 
 To build:
 
