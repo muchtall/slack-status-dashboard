@@ -4,7 +4,7 @@ import sys
 import os
 import urllib
 import json
-import emoji
+#import emoji
 import logging
 from slack import WebClient
 from slack.errors import SlackApiError
@@ -37,6 +37,11 @@ def webserver():
 
 def dashboard():
 	### Slack dashboard
+
+    # Get a dictionary of emojis (since emoji/emojize doesn't cover them all)
+	with urllib.request.urlopen('https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji.json') as standard_emoji_response:
+        emoji_dict = json.loads(standard_emoji_response.read().decode())
+
 	client = WebClient(token=slack_token)
 	
 	def GetUserInfo(users_list, user_id):
@@ -130,8 +135,13 @@ def dashboard():
 	      try:
 	        status_emoji_url = custom_emoji_list[status_emoji]
 	      except:
-	        emoji_code = emoji.emojize(':'+status_emoji+':').lower()
-	        logging.info("Emoji code: " + emoji_code)
+	        #emoji_code = emoji.emojize(':'+status_emoji+':').lower()
+            for emoji_entry in emoji_dict:
+                if emoji_entry["short_name"].lower() == status_emoji.lower():
+                    emoji_code = emoji_entry["unified"]
+                    break
+            else:
+                logging.info("Emoji code found for: " + status_emoji)
 	        emoji_code_lower = f'{ord(emoji_code):X}'.lower()
 	        status_emoji_url = 'https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-large/' + emoji_code_lower + '.png'
 	    else:
