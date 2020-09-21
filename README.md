@@ -14,3 +14,5 @@ Usage example:
 The script polls the Slack API every ~60 seconds. The page refreshes itself in the browser every 5 seconds.
 
 This is intended to work in concert with https://github.com/muchtall/slack-status-updater
+
+Google fodder: Slack Status In-Out Board
