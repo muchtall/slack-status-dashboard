@@ -1,4 +1,6 @@
 # slack-status-dashboard
+*Does your department have walk-up's, and your visitors have that common question? **"Is so-and-so in today?"***
+
 Similar to an in-out board, this is a simple HTML dashboard to allow walk-up kiosk viewers to see the status of department members at a glance.
 
 To build:
