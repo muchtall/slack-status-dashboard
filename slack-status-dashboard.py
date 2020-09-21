@@ -136,13 +136,13 @@ def dashboard():
 	        status_emoji_url = custom_emoji_list[status_emoji]
 	      except:
 	        #emoji_code = emoji.emojize(':'+status_emoji+':').lower()
+	        #emoji_code_lower = f'{ord(emoji_code):X}'.lower()
 	        for emoji_entry in emoji_dict:
 	          if emoji_entry["short_name"].lower() == status_emoji.lower():
-	            emoji_code = emoji_entry["unified"]
+	            emoji_code_lower = emoji_entry["unified"].lower()
 	            break
 	          else:
 	            logging.info("Emoji code found for: " + status_emoji)
-	        emoji_code_lower = f'{ord(emoji_code):X}'.lower()
 	        status_emoji_url = 'https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-large/' + emoji_code_lower + '.png'
 	    else:
 	      status_emoji_url = ''
