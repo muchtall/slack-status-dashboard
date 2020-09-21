@@ -14,6 +14,8 @@ import os
 import re
 from multiprocessing import Process
 
+logging.basicConfig(level=logging.INFO)
+
 output_filename = "slack-status-dashboard.html"
 slack_token = os.environ["SLACK_API_TOKEN"]
 slack_user_ids = os.environ["SLACK_USER_IDS"].split(',')
