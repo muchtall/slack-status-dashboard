@@ -128,6 +128,7 @@ def dashboard():
 	        status_emoji_url = custom_emoji_list[status_emoji]
 	      except:
 	        emoji_code = emoji.emojize(':'+status_emoji+':').lower()
+	        Logger.info("Emoji code: {emoji_code}")
 	        emoji_code_lower = f'{ord(emoji_code):X}'.lower()
 	        status_emoji_url = 'https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-large/' + emoji_code_lower + '.png'
 	    else:
