@@ -16,7 +16,7 @@ from multiprocessing import Process
 
 logging.getLogger('waitress')
 logging.basicConfig(level=logging.INFO)
-logging.setLevel(logging.INFO)
+#logging.setLevel(logging.INFO)
 
 output_filename = "slack-status-dashboard.html"
 slack_token = os.environ["SLACK_API_TOKEN"]
