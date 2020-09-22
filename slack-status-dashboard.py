@@ -145,8 +145,6 @@ def dashboard():
 	          if emoji_entry["short_name"].lower() == status_emoji.lower():
 	            emoji_code_lower = emoji_entry["unified"].lower()
 	            break
-	          else:
-	            logging.info("Emoji code found for: " + status_emoji)
 	        status_emoji_url = 'https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-large/' + emoji_code_lower + '.png'
 	    else:
 	      status_emoji_url = ''
