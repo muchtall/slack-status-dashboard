@@ -38,7 +38,7 @@ def webserver():
 
 def dashboard():
 	### Slack dashboard
-    logger.info("Dashboard refresh process started.")
+	logger.info("Dashboard refresh process started.")
 
     # Get a dictionary of emojis (since emoji/emojize doesn't cover them all)
 	with urllib.request.urlopen('https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji.json') as standard_emoji_response:
