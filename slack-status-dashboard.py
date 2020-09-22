@@ -14,6 +14,7 @@ import os
 import re
 from multiprocessing import Process
 
+logging.getLogger('waitress')
 logging.basicConfig(level=logging.INFO)
 
 output_filename = "slack-status-dashboard.html"
@@ -178,6 +179,9 @@ def dashboard():
 
     if sys.stdout.isatty():
       print()
+
+    logging.info("Refresh run completed.")
+
     time.sleep(60)
 
 if __name__ == "__main__":
