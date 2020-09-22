@@ -9,11 +9,14 @@ import logging
 from slack import WebClient
 from slack.errors import SlackApiError
 from flask import Flask, request, send_from_directory
-from waitress import serve
 import os
 import re
 from multiprocessing import Process
+from mypackage import wsgiapp
+from waitress import serve
 from paste.translogger import TransLogger
+
+serve(TransLogger(wsgiapp, setup_console_handler=False))
 
 logging.basicConfig(level=logging.INFO)
 
