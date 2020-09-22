@@ -12,16 +12,9 @@ from flask import Flask, request, send_from_directory
 import os
 import re
 from multiprocessing import Process
-from mypackage import wsgiapp
 from waitress import serve
-from paste.translogger import TransLogger
-
-serve(TransLogger(wsgiapp, setup_console_handler=False))
 
 logging.basicConfig(level=logging.INFO)
-
-waitress_logger = logging.getLogger('waitress')
-waitress_logger.setLevel(logging.DEBUG)
 
 output_filename = "slack-status-dashboard.html"
 slack_token = os.environ["SLACK_API_TOKEN"]
