@@ -13,6 +13,7 @@ from waitress import serve
 import os
 import re
 from multiprocessing import Process
+from paste.translogger import TransLogger
 
 logging.basicConfig(level=logging.INFO)
 
