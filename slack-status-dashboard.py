@@ -33,12 +33,12 @@ def root():
     return app.send_static_file(output_filename)
 
 def webserver():
-    logger.info("Webserver process started.")
+    logging.info("Webserver process started.")
     serve(app, listen='*:8880')
 
 def dashboard():
 	### Slack dashboard
-	logger.info("Dashboard refresh process started.")
+	logging.info("Dashboard refresh process started.")
 
     # Get a dictionary of emojis (since emoji/emojize doesn't cover them all)
 	with urllib.request.urlopen('https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji.json') as standard_emoji_response:
@@ -53,8 +53,8 @@ def dashboard():
 	try:
 	  emoji_response = client.emoji_list()
 	except SlackApiError as e:
-	  logger.error(e)
-	  logger.error("Unexpected error:", sys.exc_info()[0])
+	  logging.error(e)
+	  logging.error("Unexpected error:", sys.exc_info()[0])
 	  #raise
 	custom_emoji_list = emoji_response.data['emoji']
 	
@@ -79,17 +79,17 @@ def dashboard():
 	  except SlackApiError as e:
 	    if e.response["error"] == "ratelimited":
 	      delay = int(e.response.headers['Retry-After'])
-	      logger.warning(f"Rate limited. Retrying in {delay} seconds")
+	      logging.warning(f"Rate limited. Retrying in {delay} seconds")
 	      time.sleep(delay)
 	      response = client.users_list()
 	  except:
-	    logger.warning("Unexpected error:", sys.exc_info()[0])
+	    logging.warning("Unexpected error:", sys.exc_info()[0])
 	    #raise
 
 	  try:
 	    users_list = response.data['members']
 	  except:
-	    logger.error("Unexpected error:", sys.exc_info()[0])
+	    logging.error("Unexpected error:", sys.exc_info()[0])
 
 	  ### Get the dnd state of the users we care about
 	  try:
@@ -97,11 +97,11 @@ def dashboard():
 	  except SlackApiError as e:
 	    if e.response["error"] == "ratelimited":
 	      delay = int(e.response.headers['Retry-After'])
-	      logger.warning(f"Rate limited. Retrying in {delay} seconds")
+	      logging.warning(f"Rate limited. Retrying in {delay} seconds")
 	      time.sleep(delay)
 	      response = client.dnd_teamInfo(users=slack_user_ids)
 	  except:
-	    logger.error("Unexpected error:", sys.exc_info()[0])
+	    logging.error("Unexpected error:", sys.exc_info()[0])
 	    #raise
 	  dnd_users = response.data['users']
 	
@@ -119,11 +119,11 @@ def dashboard():
 	    except SlackApiError as e:
 	        if e.response["error"] == "ratelimited":
 	          delay = int(e.response.headers['Retry-After'])
-	          logger.warning(f"Rate limited. Retrying in {delay} seconds")
+	          logging.warning(f"Rate limited. Retrying in {delay} seconds")
 	          time.sleep(delay)
 	          response = client.client.users_getPresence(user=user_id)
 	    except:
-	      logger.error("Unexpected error:", sys.exc_info()[0])
+	      logging.error("Unexpected error:", sys.exc_info()[0])
 	      #raise
 	
 	    presence = response.data['presence']
