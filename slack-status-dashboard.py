@@ -175,7 +175,7 @@ def dashboard():
 	    myfile.write('\n'.join(html_output))
 
 	  if sys.stdout.isatty():
-        print()
+	    print()
 	  time.sleep(60)
 
 if __name__ == "__main__":
