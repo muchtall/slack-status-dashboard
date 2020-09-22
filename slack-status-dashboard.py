@@ -83,8 +83,12 @@ def dashboard():
 	  except:
 	    print("Unexpected error:", sys.exc_info()[0])
 	    #raise
-	  users_list = response.data['members']
-	
+
+	  try:
+	    users_list = response.data['members']
+	  except:
+	    print("Unexpected error:", sys.exc_info()[0])
+
 	  ### Get the dnd state of the users we care about
 	  try:
 	    response = client.dnd_teamInfo(users=slack_user_ids)
