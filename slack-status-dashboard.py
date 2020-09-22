@@ -4,7 +4,8 @@ import sys
 import os
 import urllib
 import json
-import emoji
+#import emoji
+import logging
 from slack import WebClient
 from slack.errors import SlackApiError
 from flask import Flask, request, send_from_directory
@@ -12,6 +13,8 @@ from waitress import serve
 import os
 import re
 from multiprocessing import Process
+
+logging.basicConfig(level=logging.INFO)
 
 output_filename = "slack-status-dashboard.html"
 slack_token = os.environ["SLACK_API_TOKEN"]
@@ -34,6 +37,11 @@ def webserver():
 
 def dashboard():
 	### Slack dashboard
+
+    # Get a dictionary of emojis (since emoji/emojize doesn't cover them all)
+	with urllib.request.urlopen('https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji.json') as standard_emoji_response:
+	  emoji_dict = json.loads(standard_emoji_response.read().decode())
+
 	client = WebClient(token=slack_token)
 	
 	def GetUserInfo(users_list, user_id):
@@ -75,8 +83,12 @@ def dashboard():
 	  except:
 	    print("Unexpected error:", sys.exc_info()[0])
 	    #raise
-	  users_list = response.data['members']
-	
+
+	  try:
+	    users_list = response.data['members']
+	  except:
+	    print("Unexpected error:", sys.exc_info()[0])
+
 	  ### Get the dnd state of the users we care about
 	  try:
 	    response = client.dnd_teamInfo(users=slack_user_ids)
@@ -127,8 +139,12 @@ def dashboard():
 	      try:
 	        status_emoji_url = custom_emoji_list[status_emoji]
 	      except:
-	        emoji_code = emoji.emojize(':'+status_emoji+':').lower()
-	        emoji_code_lower = f'{ord(emoji_code):X}'.lower()
+	        #emoji_code = emoji.emojize(':'+status_emoji+':').lower()
+	        #emoji_code_lower = f'{ord(emoji_code):X}'.lower()
+	        for emoji_entry in emoji_dict:
+	          if emoji_entry["short_name"].lower() == status_emoji.lower():
+	            emoji_code_lower = emoji_entry["unified"].lower()
+	            break
 	        status_emoji_url = 'https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-large/' + emoji_code_lower + '.png'
 	    else:
 	      status_emoji_url = ''

@@ -1,4 +1,4 @@
 Flask==1.1.2
 waitress==1.4.4
 slackclient==2.9.0
-emoji==0.6.0
+#emoji==0.6.0
