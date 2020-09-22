@@ -33,10 +33,12 @@ def root():
     return app.send_static_file(output_filename)
 
 def webserver():
+    logger.info("Webserver process started.")
     serve(app, listen='*:8880')
 
 def dashboard():
 	### Slack dashboard
+    logger.info("Dashboard refresh process started.")
 
     # Get a dictionary of emojis (since emoji/emojize doesn't cover them all)
 	with urllib.request.urlopen('https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji.json') as standard_emoji_response:
@@ -51,8 +53,8 @@ def dashboard():
 	try:
 	  emoji_response = client.emoji_list()
 	except SlackApiError as e:
-	  print(e)
-	  print("Unexpected error:", sys.exc_info()[0])
+	  logger.error(e)
+	  logger.error("Unexpected error:", sys.exc_info()[0])
 	  #raise
 	custom_emoji_list = emoji_response.data['emoji']
 	
