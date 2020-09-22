@@ -77,17 +77,17 @@ def dashboard():
 	  except SlackApiError as e:
 	    if e.response["error"] == "ratelimited":
 	      delay = int(e.response.headers['Retry-After'])
-	      print(f"Rate limited. Retrying in {delay} seconds")
+	      logger.warning(f"Rate limited. Retrying in {delay} seconds")
 	      time.sleep(delay)
 	      response = client.users_list()
 	  except:
-	    print("Unexpected error:", sys.exc_info()[0])
+	    logger.warning("Unexpected error:", sys.exc_info()[0])
 	    #raise
 
 	  try:
 	    users_list = response.data['members']
 	  except:
-	    print("Unexpected error:", sys.exc_info()[0])
+	    logger.error("Unexpected error:", sys.exc_info()[0])
 
 	  ### Get the dnd state of the users we care about
 	  try:
@@ -95,11 +95,11 @@ def dashboard():
 	  except SlackApiError as e:
 	    if e.response["error"] == "ratelimited":
 	      delay = int(e.response.headers['Retry-After'])
-	      print(f"Rate limited. Retrying in {delay} seconds")
+	      logger.warning(f"Rate limited. Retrying in {delay} seconds")
 	      time.sleep(delay)
 	      response = client.dnd_teamInfo(users=slack_user_ids)
 	  except:
-	    print("Unexpected error:", sys.exc_info()[0])
+	    logger.error("Unexpected error:", sys.exc_info()[0])
 	    #raise
 	  dnd_users = response.data['users']
 	
@@ -117,11 +117,11 @@ def dashboard():
 	    except SlackApiError as e:
 	        if e.response["error"] == "ratelimited":
 	          delay = int(e.response.headers['Retry-After'])
-	          print(f"Rate limited. Retrying in {delay} seconds")
+	          logger.warning(f"Rate limited. Retrying in {delay} seconds")
 	          time.sleep(delay)
 	          response = client.client.users_getPresence(user=user_id)
 	    except:
-	      print("Unexpected error:", sys.exc_info()[0])
+	      logger.error("Unexpected error:", sys.exc_info()[0])
 	      #raise
 	
 	    presence = response.data['presence']
@@ -149,7 +149,8 @@ def dashboard():
 	    else:
 	      status_emoji_url = ''
 	
-	    print('{:<30}{:<20}{:<30}{:<20}{:<100}'.format(real_name,presence+dnd_state,status,status_emoji,status_emoji_url))
+	    if sys.stdout.isatty():
+	      print('{:<30}{:<20}{:<30}{:<20}{:<100}'.format(real_name,presence+dnd_state,status,status_emoji,status_emoji_url))
 	    if status_emoji_url:
 	      status_emoji_html = "<img src=\""+status_emoji_url+"\" width=\"12\" height=\"12\">"
 	    else:
@@ -172,8 +173,9 @@ def dashboard():
 	  html_output.append("</table></p></body></html>")
 	  with open(output_static_path, mode='wt', encoding='utf-8') as myfile:
 	    myfile.write('\n'.join(html_output))
-	  
-	  print()
+
+	  if sys.stdout.isatty():
+        print()
 	  time.sleep(60)
 
 if __name__ == "__main__":
