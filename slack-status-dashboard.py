@@ -126,9 +126,9 @@ def dashboard():
             time.sleep(delay)
             response = client.client.users_getPresence(user=user_id)
       except:
-      logging.error("Unexpected error:", sys.exc_info()[0])
-      #raise
-      sys.exit()
+        logging.error("Unexpected error:", sys.exc_info()[0])
+        #raise
+        sys.exit()
   
       presence = response.data['presence']
   
