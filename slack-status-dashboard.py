@@ -56,6 +56,7 @@ def dashboard():
     logging.error(e)
     logging.error("Unexpected error:", sys.exc_info()[0])
     #raise
+    sys.exit()
   custom_emoji_list = emoji_response.data['emoji']
   
   while True:
@@ -83,8 +84,9 @@ def dashboard():
         time.sleep(delay)
         response = client.users_list()
     except:
-      logging.warning("Unexpected error:", sys.exc_info()[0])
+      logging.error("Unexpected error:", sys.exc_info()[0])
       #raise
+      sys.exit()
 
     try:
       users_list = response.data['members']
@@ -124,8 +126,9 @@ def dashboard():
             time.sleep(delay)
             response = client.client.users_getPresence(user=user_id)
       except:
-        logging.error("Unexpected error:", sys.exc_info()[0])
-        #raise
+      logging.error("Unexpected error:", sys.exc_info()[0])
+      #raise
+      sys.exit()
   
       presence = response.data['presence']
   
