@@ -14,6 +14,7 @@ import re
 from multiprocessing import Process
 from waitress import serve
 
+retry_sleep = 60
 logging.basicConfig(level=logging.INFO)
 
 output_filename = "slack-status-dashboard.html"
@@ -40,7 +41,7 @@ def dashboard():
   ### Slack dashboard
   logging.info("Dashboard process started.")
 
-    # Get a dictionary of emojis (since emoji/emojize doesn't cover them all)
+  # Get a dictionary of emojis (since emoji/emojize doesn't cover them all)
   with urllib.request.urlopen('https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji.json') as standard_emoji_response:
     emoji_dict = json.loads(standard_emoji_response.read().decode())
 
@@ -49,14 +50,16 @@ def dashboard():
   def GetUserInfo(users_list, user_id):
     return [obj for obj in users_list if obj['id']==user_id]
   
-  
-  try:
-    emoji_response = client.emoji_list()
-  except SlackApiError as e:
-    logging.error(e)
-    logging.error("Unexpected error:", sys.exc_info()[0])
-    #raise
-    sys.exit()
+  while true:
+    try:
+      emoji_response = client.emoji_list()
+    except SlackApiError as e:
+      logging.error(e)
+      logging.error("Unexpected error:", sys.exc_info()[0])
+      time.sleep(retry_sleep)
+    else:
+      break
+
   custom_emoji_list = emoji_response.data['emoji']
   
   while True:
