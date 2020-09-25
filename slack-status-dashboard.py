@@ -54,7 +54,6 @@ def dashboard():
     try:
       emoji_response = client.emoji_list()
     except SlackApiError as e:
-      logging.error(e)
       logging.error("Unexpected error:", sys.exc_info()[0])
       time.sleep(retry_sleep)
     else:
@@ -87,7 +86,6 @@ def dashboard():
           logging.warning(f"Rate limited. Retrying in {delay} seconds")
           time.sleep(delay)
       except:
-        logging.error(e)
         logging.error("Unexpected error:", sys.exc_info()[0])
         time.sleep(retry_sleep)
       else:
@@ -105,7 +103,6 @@ def dashboard():
           logging.warning(f"Rate limited. Retrying in {delay} seconds")
           time.sleep(delay)
       except:
-        logging.error(e)
         logging.error("Unexpected error:", sys.exc_info()[0])
         time.sleep(retry_sleep)
       else:
@@ -130,7 +127,6 @@ def dashboard():
               logging.warning(f"Rate limited. Retrying in {delay} seconds")
               time.sleep(delay)
         except:
-          logging.error(e)
           logging.error("Unexpected error:", sys.exc_info()[0])
           time.sleep(retry_sleep)
         else:
