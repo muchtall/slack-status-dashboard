@@ -58,17 +58,20 @@ def dashboard():
     #raise
     sys.exit()
   custom_emoji_list = emoji_response.data['emoji']
-  
+
   while True:
     #print("\033c")
     html_output = ['<html><head><title>' + page_header + '</title>']
     html_output.append('<style>')
-    html_output.append('@font-face{font-family:Slack-Lato;font-style:normal;font-weight:400;src:local("\263A"),url(https://a.slack-edge.com/bv1-8-83658ee/lato-regular-d9ce515.woff2) format("woff2"),url(https://a.slack-edge.com/bv1-8-83658ee/lato-regular-ea6d1e4.woff) format("woff");unicode-range:U+0000-f8fe,U+f900-ffff}')
-    html_output.append('@font-face{font-family:Slack-Lato;src:url(https://a.slack-edge.com/bv1-8-83658ee/slack-icons-v2-bd8eec0.woff2) format("woff2"),url(https://a.slack-edge.com/bv1-8-83658ee/slack-icons-v2-36256a5.woff) format("woff");font-style:normal;font-weight:400; unicode-range:U+e506-e508,U+e535-e535;}')
+    #html_output.append('@font-face{font-family:Slack-Lato;font-style:normal;font-weight:400;src:local("\263A"),url(https://a.slack-edge.com/bv1-8-83658ee/lato-regular-d9ce515.woff2) format("woff2"),url(https://a.slack-edge.com/bv1-8-83658ee/lato-regular-ea6d1e4.woff) format("woff");unicode-range:U+0000-f8fe,U+f900-ffff}')
+    html_output.append('@font-face{font-family:Slack-Lato;font-style:normal;font-weight:400;src:local("\263A"),url(https://a.slack-edge.com/bv1-9/lato-regular-d9ce515.woff2) format("woff2"),url(https://a.slack-edge.com/bv1-9/lato-regular-d9ce515.woff2) format("woff");unicode-range:U+0000-f8fe,U+f900-ffff}')
+    #html_output.append('@font-face{font-family:Slack-Lato;src:url(https://a.slack-edge.com/bv1-8-83658ee/slack-icons-v2-bd8eec0.woff2) format("woff2"),url(https://a.slack-edge.com/bv1-8-83658ee/slack-icons-v2-36256a5.woff) format("woff");font-style:normal;font-weight:400; unicode-range:U+e506-e508,U+e535-e535;}')
+    html_output.append('@font-face{font-family:Slack-Lato;src:url(https://a.slack-edge.com/bv1-9/slack-icons-v2-52a0486.woff2) format("woff2"),url(https://a.slack-edge.com/bv1-9/slack-icons-v2-52a0486.woff2) format("woff");font-style:normal;font-weight:400; unicode-range:U+e506-e508,U+e535-e535;}')
     html_output.append('body {font-family: Slack-Lato;}')
     html_output.append('table.center {margin-left:auto; margin-right:auto;}')
     html_output.append('</style>')
-    html_output.append('<link rel="stylesheet" href="https://a.slack-edge.com/bv1-8-83658ee/client-boot-styles.fc78710.css?cacheKey=gantry-1594776859">')
+    #html_output.append('<link rel="stylesheet" href="https://a.slack-edge.com/bv1-8-83658ee/client-boot-styles.fc78710.css?cacheKey=gantry-1594776859">')
+    html_output.append('<link rel="stylesheet" href="https://a.slack-edge.com/bv1-9/client-boot-styles.61735d1.css?cacheKey=gantry-1611290310">')
     html_output.append('<meta http-equiv="refresh" content="5">')
     html_output.append('</head><body><table class="center" style="text-align: left; font-family: \'Slack-Lato\'">')
     html_output.append("<thead ><tr><th colspan=\"4\" style=\"text-align: center;\">" + page_header + "<br><br></tr></thead>")
